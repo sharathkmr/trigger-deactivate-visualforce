@@ -1,0 +1,52 @@
+<!-- 
+    Author : $harath
+-->
+
+<apex:page sidebar="false" controller="vf_trigControl_checkbox">
+    
+  <apex:pageBlock id="pageBlockMain">
+  <apex:form >
+  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+      <script>
+      $(window).ready(function(){
+      
+      console.log('------------- Document Loaded successfully ---------------');
+      
+      <apex:repeat value="{!trigList}" var="l">
+         console.log("{!l.at.name} - {!l.enabled}");
+        if(!{!l.enabled} ) {
+            $("#onoffswitch-{!l.at.name}").prop("checked",false);
+            
+            console.log("onoffswitch-{!l.at.name} is off");
+        } else {
+                          
+        }
+              
+      </apex:repeat>
+      
+      });
+      
+      </script>
+      <apex:pageBlockSection >
+          <apex:pageBlockTable value="{!trigList}" var="l">
+              
+              <apex:column value="{!l.at.name}"/>
+              <apex:column value="{!l.at.TableEnumOrId}" headerValue="Object"/>
+              <apex:column headerValue="Enabled">
+                  <apex:outputText value="{!l.enabled}"/>
+              </apex:column>
+              
+              <apex:column headerValue="Enabled">
+                  <apex:inputCheckbox onclick="{!l.enabled}" value="{!l.enabled}" id="checkbox">
+                      <apex:actionSupport action="{!updateStatus}" event="onclick" reRender="pageBlockMain">
+                           <apex:param value="{!l.count}" name="rowNum"/>   
+                      </apex:actionSupport>
+                  </apex:inputCheckbox>
+              </apex:column>
+              
+          </apex:pageBlockTable>
+      </apex:pageBlockSection>
+  </apex:form>
+  </apex:pageBlock>
+</apex:page>
