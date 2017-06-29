@@ -1,5 +1,7 @@
 # trigger-deactivate-visualforce
 
+Disable a trigger with simple click using custom settings
+
 License
 MIT License
 
